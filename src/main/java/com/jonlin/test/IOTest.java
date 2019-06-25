@@ -2,6 +2,9 @@ package com.jonlin.test;
 
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -128,5 +131,17 @@ public class IOTest {
         String root = IOTest.class.getResource("/").getPath();
         String filePathRoot = root.substring(1);
         return filePathRoot;
+    }
+
+    /**
+     * 读取指定文件所有内容
+     * @throws IOException
+     */
+    public void getAllContent() throws IOException{
+        // 获取resource目录下文件
+        String pastr= this.getClass().getResource("/test.txt").getFile();
+        System.out.println("pastr=" + pastr);
+        String content = new String(Files.readAllBytes(Paths.get(pastr.substring(1))), StandardCharsets.UTF_8);
+        System.out.println("content=" + content);
     }
 }
